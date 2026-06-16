@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products-Muse</title>
+    <link rel="stylesheet" href="muse.css">
+</head>
+<body>
+
+    <div class="header">
+    <div class="container">
+       <div class="navbar">
+        <div class="logo">
+            <img src="https://i.postimg.cc/7YR2cMrv/Screenshot-2026-06-14-055442.png" width="100px">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="muse.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="">Account</a></li>
+            </ul>
+        </nav>
+           <a href="cart.html"><img src="cart.icon.png" width="40px" height="40px"></a>
+    </div>
+    </div>
+    </div>
+ <! ---------cart item details--------->
+<div class="small-container cart-page">
+      <thead>
+      <table>
+      </thead>
+        <tbody id="cart-items"></tbody>
+      </table>
+<h3>Total: $<span id="cart-total">0</span></h3>
+</div>
+
+<!-- Replace FORM_HANDLER_URL with your actual backend URL or form service link -->
+<form action="https://formspree.io/f/xnjywewv" method="POST" id="checkout-form">
+  
+  <h3>Shipping & Order Information</h3>
+  
+  <div>
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" required>
+  </div>
+
+  <div>
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required>
+  </div>
+
+  <div>
+    <label for="address">Shipping Address:</label>
+    <textarea id="address" name="address" rows="1" required></textarea>
+  </div>
+  <div>
+    <label for="product">product name:</label>
+    <textarea id="product" name="product" rows="1" required></textarea>
+  </div>
+
+  <div>
+    <label for="notes">Order Notes (Optional):</label>
+    <textarea id="notes" name="notes" rows="1"></textarea>
+  </div>
+
+  <!-- Hidden field to pass cart totals or item summaries dynamically via JavaScript -->
+  <input type="hidden" id="order-summary" name="order_summary" value="">
+
+  <button class="btn" type="submit">Place Order</button>
+</form>
+
+
+
+    <!------------ footer ----------->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer2">
+                    <h1>Muse</h1>
+                    <p> Our Purpose is to Revive Individualty and Uniqueness </p>
+                </div>
+                <div class="footer3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>BLog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliation</li>
+                    </ul>
+                </div>
+                 <div class="footer4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Instagram</li>
+                        <li>Tiktok</li>
+                        <li>twitter</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">Copyright 2026 muse</p>
+        </div>
+    </div>
+
+<script src="cart.js"></script>
+
+<script>
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const cartItems = document.getElementById("cart-items");
+  const totalElement = document.getElementById("cart-total");
+
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price;
+
+    cartItems.innerHTML += `
+      <tr>
+        <td>
+          <img src="${item.image}" width="50">
+          ${item.name}
+        </td>
+        <td>$${item.price}</td>
+        <td>
+            <button onclick="removeFromCart()">
+            remove
+            </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  totalElement.textContent = total;
+  </script>
+
+
+
+
+</body>
+</html>
